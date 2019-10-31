@@ -9027,6 +9027,25 @@
                           "IncludeInDocumentation": true,
                           "Enabled": true,
                           "ReadOnly": false
+                        },
+                        {
+                          "$type": "Models.Functions.ExpressionFunction, Models",
+                          "Expression": "[Weather].MeanT * 45.6 + [Soil].Thickness[3]",
+                          "Name": "ExpressionFunction",
+                          "Children": [
+                            {
+                              "$type": "Models.Memo, Models",
+                              "Text": "got this data from ...",
+                              "Name": "Memo",
+                              "Children": [],
+                              "IncludeInDocumentation": true,
+                              "Enabled": false,
+                              "ReadOnly": false
+                            }
+                          ],
+                          "IncludeInDocumentation": true,
+                          "Enabled": false,
+                          "ReadOnly": false
                         }
                       ],
                       "IncludeInDocumentation": true,
@@ -20613,7 +20632,9 @@
             }
           ],
           "LegendPosition": 0,
+          "LegendOrientation": 0,
           "DisabledSeries": [],
+          "LegendOutsideGraph": false,
           "Name": "NoMortality",
           "Children": [
             {
@@ -20859,7 +20880,9 @@
             }
           ],
           "LegendPosition": 0,
+          "LegendOrientation": 0,
           "DisabledSeries": [],
+          "LegendOutsideGraph": false,
           "Name": "WithMortality",
           "Children": [
             {
