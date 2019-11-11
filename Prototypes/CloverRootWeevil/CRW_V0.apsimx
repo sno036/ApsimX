@@ -1,7 +1,7 @@
 {
   "$type": "Models.Core.Simulations, Models",
   "ExplorerWidth": 282,
-  "Version": 67,
+  "Version": 68,
   "Name": "Simulations",
   "Children": [
     {
@@ -11147,7 +11147,12 @@
               "$type": "Models.LifeCycle.LifeCycle, Models",
               "CurrentLifeStage": null,
               "InitialPopulation": [
-                1.0,
+                100.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
                 0.0
               ],
               "Name": "LifeCycle",
@@ -11173,26 +11178,42 @@
                       "Name": "EggDevelopment",
                       "Children": [
                         {
+                          "$type": "Models.Functions.ExpressionFunction, Models",
+                          "Expression": "([Soil].Temperature[1] - 4.3))",
+                          "Name": "ExpressionFunction",
+                          "Children": [],
+                          "IncludeInDocumentation": true,
+                          "Enabled": false,
+                          "ReadOnly": false
+                        },
+                        {
                           "$type": "Models.Functions.AirTemperatureFunction, Models",
-                          "Name": "EggThermalTimeDevelopment",
+                          "Name": "ThermalTimeDevelopment",
                           "Children": [
                             {
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
                                 0.1,
-                                10.0,
-                                20.0,
-                                30.0,
-                                34.0
+                                4.3,
+                                21.0,
+                                30.0
                               ],
                               "Y": [
                                 0.0,
                                 0.0,
-                                0.1,
-                                0.2,
-                                0.0
+                                15.6,
+                                15.6
                               ],
                               "Name": "XYPairs",
+                              "Children": [],
+                              "IncludeInDocumentation": true,
+                              "Enabled": true,
+                              "ReadOnly": false
+                            },
+                            {
+                              "$type": "Models.Memo, Models",
+                              "Text": "Thermal time determines the rate of developmental progress through many of the crops phases and is used by organs to determing potential growth rates.",
+                              "Name": "Memo",
                               "Children": [],
                               "IncludeInDocumentation": true,
                               "Enabled": true,
@@ -11223,9 +11244,9 @@
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
                                 0.0,
-                                0.99,
-                                1.0,
-                                2.0
+                                235.0,
+                                236.0,
+                                300.0
                               ],
                               "Y": [
                                 0.0,
@@ -12655,6 +12676,169 @@
               ],
               "Name": "Report",
               "Children": [],
+              "IncludeInDocumentation": true,
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Report.Report, Models",
+              "VariableNames": [
+                "[Clock].Today",
+                "[Soil].CERESSoilTemperature.Value[1]",
+                "[LifeCycle].Egg.EggDevelopment.ExpressionFunction",
+                "[LifeCycle].Egg.CohortCount",
+                "[LifeCycle].Egg.CurrentCohort.ChronoAge",
+                "[LifeCycle].Egg.CurrentCohort.PhenoAge",
+                "[LifeCycle].Egg.CurrentCohort.PhysiologicalAge",
+                "[LifeCycle].Egg..CurrentCohort.Count",
+                "[LifeCycle].Egg.CurrentCohort.Mortality",
+                "[LifeCycle].Egg.CurrentLifeStage.CurrentCohort.PhenoAge",
+                "[LifeCycle].Egg.Populations"
+              ],
+              "EventNames": [
+                "[Clock].DoReport"
+              ],
+              "Name": "EggDEv",
+              "Children": [],
+              "IncludeInDocumentation": true,
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Graph.Graph, Models",
+              "Caption": null,
+              "Axis": [
+                {
+                  "$type": "Models.Graph.Axis, Models",
+                  "Type": 3,
+                  "Title": null,
+                  "Inverted": false,
+                  "Minimum": "NaN",
+                  "Maximum": "NaN",
+                  "Interval": "NaN",
+                  "DateTimeAxis": true,
+                  "CrossesAtZero": false
+                },
+                {
+                  "$type": "Models.Graph.Axis, Models",
+                  "Type": 0,
+                  "Title": null,
+                  "Inverted": false,
+                  "Minimum": "NaN",
+                  "Maximum": "NaN",
+                  "Interval": "NaN",
+                  "DateTimeAxis": false,
+                  "CrossesAtZero": false
+                },
+                {
+                  "$type": "Models.Graph.Axis, Models",
+                  "Type": 2,
+                  "Title": null,
+                  "Inverted": false,
+                  "Minimum": "NaN",
+                  "Maximum": "NaN",
+                  "Interval": "NaN",
+                  "DateTimeAxis": false,
+                  "CrossesAtZero": false
+                }
+              ],
+              "LegendPosition": 0,
+              "LegendOrientation": 0,
+              "DisabledSeries": [],
+              "LegendOutsideGraph": false,
+              "Name": "Graph",
+              "Children": [
+                {
+                  "$type": "Models.Graph.Series, Models",
+                  "Type": 1,
+                  "XAxis": 3,
+                  "YAxis": 0,
+                  "ColourArgb": 0,
+                  "FactorToVaryColours": null,
+                  "FactorToVaryMarkers": null,
+                  "FactorToVaryLines": null,
+                  "Marker": 11,
+                  "MarkerSize": 0,
+                  "Line": 0,
+                  "LineThickness": 0,
+                  "Checkpoint": "Current",
+                  "TableName": "EggDEv",
+                  "XFieldName": "Clock.Today",
+                  "YFieldName": "LifeCycle.Egg.CurrentCohort.Count",
+                  "X2FieldName": null,
+                  "Y2FieldName": null,
+                  "ShowInLegend": false,
+                  "IncludeSeriesNameInLegend": false,
+                  "Cumulative": false,
+                  "CumulativeX": false,
+                  "Filter": null,
+                  "Name": "Series",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Graph.Series, Models",
+                  "Type": 1,
+                  "XAxis": 3,
+                  "YAxis": 2,
+                  "ColourArgb": -1663232,
+                  "FactorToVaryColours": null,
+                  "FactorToVaryMarkers": null,
+                  "FactorToVaryLines": null,
+                  "Marker": 11,
+                  "MarkerSize": 0,
+                  "Line": 0,
+                  "LineThickness": 0,
+                  "Checkpoint": "Current",
+                  "TableName": "EggDEv",
+                  "XFieldName": "Clock.Today",
+                  "YFieldName": "LifeCycle.Egg.CohortCount",
+                  "X2FieldName": null,
+                  "Y2FieldName": null,
+                  "ShowInLegend": false,
+                  "IncludeSeriesNameInLegend": false,
+                  "Cumulative": false,
+                  "CumulativeX": false,
+                  "Filter": null,
+                  "Name": "Series1",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Graph.Series, Models",
+                  "Type": 1,
+                  "XAxis": 3,
+                  "YAxis": 0,
+                  "ColourArgb": -11094807,
+                  "FactorToVaryColours": null,
+                  "FactorToVaryMarkers": null,
+                  "FactorToVaryLines": null,
+                  "Marker": 11,
+                  "MarkerSize": 0,
+                  "Line": 0,
+                  "LineThickness": 0,
+                  "Checkpoint": "Current",
+                  "TableName": "EggDEv",
+                  "XFieldName": "Clock.Today",
+                  "YFieldName": "LifeCycle.Egg.CurrentCohort.PhysiologicalAge",
+                  "X2FieldName": null,
+                  "Y2FieldName": null,
+                  "ShowInLegend": false,
+                  "IncludeSeriesNameInLegend": false,
+                  "Cumulative": false,
+                  "CumulativeX": false,
+                  "Filter": null,
+                  "Name": "Series11",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": true,
+                  "ReadOnly": false
+                }
+              ],
               "IncludeInDocumentation": true,
               "Enabled": true,
               "ReadOnly": false
