@@ -21626,7 +21626,7 @@
                   "Children": [
                     {
                       "$type": "Models.Memo, Models",
-                      "Text": "**Egg**\n\n(As at 14 November 2019 - VOS)\n\nIn the first layer of the soil.\n\nDevelopment is driven by temperature in the first layer of the soil. No development below 4 C, increases to 16 DegDay / day at 20 C and remains at that value. Physiological age is the accumulation of degree days.\n\nOnce the physiological age reaches 236 DegDay the egg hatches.\n\nMortality is driven by:\n\n- if soil temperature (daylong average) in the first layer is below -5 then all eggs die immediately \n\n- if soil temperature (daylong average) in the first layer rises above 20 C the eggs start to die off at a rate that increases to 0.1 per day at 30 C (at 0.1 /day maintained for 14 days would leave 23% viable eggs remaining), betgween 30 and 50 C the die-off rate increases more steeply so that a day at 50 C would kill all eggs immediately.\n\n- if soil moisture in the top layer drops \n\n\n\nDevelopment driven by thermal time\n\nMortality:\n\n- too dry\n\n- too hot\n\n- predation (ants, beetles)\n\n\nDevelops to Larva I\n",
+                      "Text": "**Egg**\n\n(As at 14 November 2019 - VOS)\n\nIn the first layer of the soil.\n\nDevelopment is driven by temperature in the first layer of the soil. No development below 4 C, increases to 16 DegDay / day at 20 C and remains at that value. Physiological age is the accumulation of degree days.\n\nOnce the physiological age reaches 236 DegDay the egg hatches.\n\nMortality is driven by:\n\n- if soil temperature (daylong average) in the first layer is below -5 then all eggs die immediately \n\n- if soil temperature (daylong average) in the first layer rises above 20 C the eggs start to die off at a rate that increases to 0.1 per day at 30 C (at 0.1 /day maintained for 14 days would leave 23% viable eggs remaining), between 30 and 50 C the die-off rate increases more steeply so that a day at 50 C would kill all eggs immediately.\n\n- a dryness soil moisture function is defined that is: < 0 below 15 bars, 0 at 15 bars, 1 at the drained upper limit, and > 1 for moister soils. The mortality rate is 0 (i.e. no deaths due to soil dryness) when the water content is at or above the drained upper limit, and is 0.1 at the 15 bar water content. For drier soils the mortality increases steeply and is 0.5 when the water content is half the 15 bar value (i.e. pretty close to air dry). A mortality rate of 0.1 for a week will kill about 50% of the population; at 0.5 it would kill 50% of the population in two days.  \n\n- an excess soil moisture function is defined that is: < 0 below DUL, 0 at DUL, and 1 at saturation. The mortality rate is 0 (i.e. no deaths due to soil excess moisture) when the water content is at or below the DUL, and is 0.1 at saturation. A mortality rate of 0.1 for a week will kill about 50% of the population.  \n",
                       "Name": "Memo",
                       "Children": [],
                       "IncludeInDocumentation": true,
@@ -21896,8 +21896,8 @@
                               "Y": [
                                 0.0,
                                 0.0,
-                                0.02,
-                                0.02
+                                0.1,
+                                0.1
                               ],
                               "Name": "XYPairs",
                               "Children": [],
