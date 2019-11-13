@@ -12729,6 +12729,135 @@
           "IncludeInDocumentation": true,
           "Enabled": false,
           "ReadOnly": false
+        },
+        {
+          "$type": "Models.LifeCycle.LifeStageProcess, Models",
+          "ProcessAction": 2,
+          "TransferTo": null,
+          "Name": "EggMortality",
+          "Children": [
+            {
+              "$type": "Models.Functions.LinearInterpolationFunction, Models",
+              "XProperty": "[Soil].Temperature[1]",
+              "Name": "LowTempMortality",
+              "Children": [
+                {
+                  "$type": "Models.Functions.XYPairs, Models",
+                  "X": [
+                    -16.0,
+                    -6.0,
+                    -5.0,
+                    20.0
+                  ],
+                  "Y": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "Name": "XYPairs",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": false,
+                  "ReadOnly": false
+                }
+              ],
+              "IncludeInDocumentation": true,
+              "Enabled": false,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Functions.LinearInterpolationFunction, Models",
+              "XProperty": "[Soil].Temperature[1]",
+              "Name": "HighTempMortality",
+              "Children": [
+                {
+                  "$type": "Models.Functions.XYPairs, Models",
+                  "X": [
+                    0.0,
+                    20.0,
+                    35.0,
+                    50.0
+                  ],
+                  "Y": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                  ],
+                  "Name": "XYPairs",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": false,
+                  "ReadOnly": false
+                }
+              ],
+              "IncludeInDocumentation": true,
+              "Enabled": false,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Functions.LinearInterpolationFunction, Models",
+              "XProperty": "[Soil].SoilWater.SWmm[1]/[Soil].DULmm[1]",
+              "Name": "SoilDrynessMortality",
+              "Children": [
+                {
+                  "$type": "Models.Functions.XYPairs, Models",
+                  "X": [
+                    0.0,
+                    1.0,
+                    2.0
+                  ],
+                  "Y": [
+                    0.5,
+                    0.0,
+                    0.0
+                  ],
+                  "Name": "XYPairs",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": false,
+                  "ReadOnly": false
+                }
+              ],
+              "IncludeInDocumentation": true,
+              "Enabled": false,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Functions.LinearInterpolationFunction, Models",
+              "XProperty": "([Soil].SoilWater.SWmm[1]-[Soil].DULmm[1])/([Soil].SATmm[1]-[Soil].DULmm[1])",
+              "Name": "SoilWetnessMortality",
+              "Children": [
+                {
+                  "$type": "Models.Functions.XYPairs, Models",
+                  "X": [
+                    -1.0,
+                    0.0,
+                    1.0,
+                    2.0
+                  ],
+                  "Y": [
+                    0.0,
+                    0.0,
+                    0.02,
+                    0.02
+                  ],
+                  "Name": "XYPairs",
+                  "Children": [],
+                  "IncludeInDocumentation": true,
+                  "Enabled": false,
+                  "ReadOnly": false
+                }
+              ],
+              "IncludeInDocumentation": true,
+              "Enabled": false,
+              "ReadOnly": false
+            }
+          ],
+          "IncludeInDocumentation": true,
+          "Enabled": false,
+          "ReadOnly": false
         }
       ],
       "IncludeInDocumentation": true,
@@ -21497,7 +21626,7 @@
                   "Children": [
                     {
                       "$type": "Models.Memo, Models",
-                      "Text": "**Larva I**\n\nLives on or near the soil surface and litter layer\n\nDevelopment driven by thermal time\n\nMortality:\n\n- too dry\n\n- too hot\n\n- predation (ants, beetles)\n\n\nDevelops to Larva I\n",
+                      "Text": "**Egg**\n\n(As at 14 November 2019 - VOS)\n\nIn the first layer of the soil.\n\nDevelopment is driven by temperature in the first layer of the soil. No development below 4 C, increases to 16 DegDay / day at 20 C and remains at that value. Physiological age is the accumulation of degree days.\n\nOnce the physiological age reaches 236 DegDay the egg hatches.\n\nMortality is driven by:\n\n- if soil temperature (daylong average) in the first layer is below -5 then all eggs die immediately \n\n- if soil temperature (daylong average) in the first layer rises above 20 C the eggs start to die off at a rate that increases to 0.1 per day at 30 C (at 0.1 /day maintained for 14 days would leave 23% viable eggs remaining), betgween 30 and 50 C the die-off rate increases more steeply so that a day at 50 C would kill all eggs immediately.\n\n- if soil moisture in the top layer drops \n\n\n\nDevelopment driven by thermal time\n\nMortality:\n\n- too dry\n\n- too hot\n\n- predation (ants, beetles)\n\n\nDevelops to Larva I\n",
                       "Name": "Memo",
                       "Children": [],
                       "IncludeInDocumentation": true,
@@ -21518,16 +21647,14 @@
                             {
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
-                                0.1,
+                                -5.0,
                                 4.0,
-                                10.0,
                                 20.0,
                                 30.0
                               ],
                               "Y": [
                                 0.0,
                                 0.0,
-                                6.0,
                                 16.0,
                                 16.0
                               ],
@@ -21665,103 +21792,127 @@
                       "Children": [
                         {
                           "$type": "Models.Functions.LinearInterpolationFunction, Models",
-                          "XProperty": "[Weather].MinT",
+                          "XProperty": "[Soil].Temperature[1]",
                           "Name": "LowTempMortality",
                           "Children": [
                             {
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
                                 -16.0,
-                                0.0,
-                                4.0
+                                -6.0,
+                                -5.0,
+                                20.0
                               ],
                               "Y": [
                                 1.0,
-                                0.2,
+                                1.0,
+                                0.0,
                                 0.0
                               ],
                               "Name": "XYPairs",
                               "Children": [],
                               "IncludeInDocumentation": true,
-                              "Enabled": false,
+                              "Enabled": true,
                               "ReadOnly": false
                             }
                           ],
                           "IncludeInDocumentation": true,
-                          "Enabled": false,
+                          "Enabled": true,
                           "ReadOnly": false
                         },
                         {
                           "$type": "Models.Functions.LinearInterpolationFunction, Models",
-                          "XProperty": "[Weather].MaxT",
+                          "XProperty": "[Soil].Temperature[1]",
                           "Name": "HighTempMortality",
                           "Children": [
                             {
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
-                                34.0,
-                                44.0,
-                                54.0
+                                0.0,
+                                20.0,
+                                30.0,
+                                50.0
                               ],
                               "Y": [
                                 0.0,
-                                0.5,
+                                0.0,
+                                0.1,
                                 1.0
                               ],
                               "Name": "XYPairs",
                               "Children": [],
                               "IncludeInDocumentation": true,
-                              "Enabled": false,
+                              "Enabled": true,
                               "ReadOnly": false
                             }
                           ],
                           "IncludeInDocumentation": true,
-                          "Enabled": false,
+                          "Enabled": true,
                           "ReadOnly": false
                         },
                         {
                           "$type": "Models.Functions.LinearInterpolationFunction, Models",
-                          "XProperty": "SoilWaterScale",
-                          "Name": "SoilHIghLowMoistureMortality",
+                          "XProperty": "([Soil].SoilWater.SWmm[1]-[Soil].LL15mm[1])/([Soil].DULmm[1]-[Soil].LL15mm[1])",
+                          "Name": "SoilDrynessMortality",
                           "Children": [
-                            {
-                              "$type": "Models.Functions.SoilWaterScale, Models",
-                              "Name": "SoilWaterScale",
-                              "Children": [],
-                              "IncludeInDocumentation": true,
-                              "Enabled": false,
-                              "ReadOnly": false
-                            },
                             {
                               "$type": "Models.Functions.XYPairs, Models",
                               "X": [
+                                -0.5,
                                 0.0,
-                                0.1,
                                 1.0,
-                                1.5,
                                 2.0
                               ],
                               "Y": [
-                                1.0,
+                                0.5,
+                                0.1,
                                 0.0,
-                                0.0,
-                                0.0,
-                                1.0
+                                0.0
                               ],
                               "Name": "XYPairs",
                               "Children": [],
                               "IncludeInDocumentation": true,
-                              "Enabled": false,
+                              "Enabled": true,
                               "ReadOnly": false
                             }
                           ],
                           "IncludeInDocumentation": true,
-                          "Enabled": false,
+                          "Enabled": true,
+                          "ReadOnly": false
+                        },
+                        {
+                          "$type": "Models.Functions.LinearInterpolationFunction, Models",
+                          "XProperty": "([Soil].SoilWater.SWmm[1]-[Soil].DULmm[1])/([Soil].SATmm[1]-[Soil].DULmm[1])",
+                          "Name": "SoilWetnessMortality",
+                          "Children": [
+                            {
+                              "$type": "Models.Functions.XYPairs, Models",
+                              "X": [
+                                -1.0,
+                                0.0,
+                                1.0,
+                                2.0
+                              ],
+                              "Y": [
+                                0.0,
+                                0.0,
+                                0.02,
+                                0.02
+                              ],
+                              "Name": "XYPairs",
+                              "Children": [],
+                              "IncludeInDocumentation": true,
+                              "Enabled": true,
+                              "ReadOnly": false
+                            }
+                          ],
+                          "IncludeInDocumentation": true,
+                          "Enabled": true,
                           "ReadOnly": false
                         }
                       ],
                       "IncludeInDocumentation": true,
-                      "Enabled": false,
+                      "Enabled": true,
                       "ReadOnly": false
                     }
                   ],
