@@ -46,7 +46,7 @@
         {
           "$type": "Models.Clock, Models",
           "Start": "2004-01-01T00:00:00",
-          "End": "2023-12-31T00:00:00",
+          "End": "2014-12-31T00:00:00",
           "Name": "Clock",
           "ResourceName": null,
           "Children": [],
@@ -175,87 +175,6 @@
           "Name": "paddock",
           "ResourceName": null,
           "Children": [
-            {
-              "$type": "Models.Manager, Models",
-              "CodeArray": [
-                "using Models.Climate;",
-                "using APSIM.Shared.Utilities;",
-                "using Models.Soils.Nutrients;",
-                "using Models.Soils;",
-                "using Models.PMF;",
-                "using Models.Core;",
-                "using System.Xml.Serialization;",
-                "using System;",
-                "using System.Linq;",
-                "using Models.AgPasture;",
-                "using Models.Interfaces;",
-                "",
-                "namespace Models",
-                "{",
-                "    [Serializable] ",
-                "    [System.Xml.Serialization.XmlInclude(typeof(Model))]",
-                "    public class Script : Model",
-                "    {",
-                "        [Link] Clock clock;",
-                "        [Link] ISummary summary;",
-                "        [Link] private Swim3 swim;",
-                "        //[Link] private PastureSpecies ryegrass;",
-                "        //[Link] private SimpleGrazing grazing;",
-                "        ",
-                "        public enum LowerBCTypeOptions {gradient,seepage,potential};",
-                "",
-                "        [Separator(\"Sets the lower boundary condition type (and value if set to 'potential' for SWIM3. The change is applied at the beginning of the first day of the simulation.\")]",
-                "        [Description(\"[Get a dropdown] What lower boundary condition is wanted?\")] public LowerBCTypeOptions LowerBCType { get; set; }",
-                "        [Description(\"If 'potential', then what potential? (mm) \")] public double LowerBCValue { get; set; }",
-                "",
-                "        public double SoilWaterStart  { get; set; }",
-                "        public double SoilWaterEnd  { get; set; }",
-                "",
-                "        [EventSubscribe(\"DoDailyInitialisation\")]",
-                "        private void DoDailyInitialisation(object sender, EventArgs e)",
-                "        {",
-                "        }",
-                "",
-                "        [EventSubscribe(\"DoReportCalculations\")]",
-                "        private void DoReportCalculations(object sender, EventArgs e)",
-                "        {",
-                "        }",
-                "",
-                "        [EventSubscribe(\"DoManagement\")]",
-                "        private void DoDailyCalculations(object sender, EventArgs e)",
-                "        {",
-                "            if (clock.Today == clock.StartDate)",
-                "            {",
-                "                summary.WriteMessage(this, \"Script is setting lower boundary condition to \" + LowerBCType, MessageType.Diagnostic);",
-                "                if (LowerBCType == LowerBCTypeOptions.gradient)",
-                "                    swim.SetLowerBCForGradient(bbcGradient: 0.0);   // in cm/cm (ibbc=0) Note that this is the default setting",
-                "                else if (LowerBCType == LowerBCTypeOptions.potential)",
-                "                    swim.SetLowerBCForGivenPotential(bbcPotential: LowerBCValue /10.0 );    //  convert to cm (ibbc=1), DUL is -100 cm so values more positive will often result in inflow to the bottom of the soil profile. Input in mm so divide here.",
-                "                else if (LowerBCType == LowerBCTypeOptions.seepage)",
-                "                    swim.SetLowerBCForSeepage(bbcPotentialSeepage: 0.0);  // in cm (ibbc=3). This is for zero-tension lysimeters",
-                "                else",
-                "                    throw new Exception(\"Wrong lower boundary condition type\");",
-                "            }",
-                "        }",
-                "    }",
-                "}"
-              ],
-              "Parameters": [
-                {
-                  "Key": "LowerBCType",
-                  "Value": "gradient"
-                },
-                {
-                  "Key": "LowerBCValue",
-                  "Value": "-500"
-                }
-              ],
-              "Name": "SWIMSetLowerBC",
-              "ResourceName": null,
-              "Children": [],
-              "Enabled": true,
-              "ReadOnly": false
-            },
             {
               "$type": "Models.Manager, Models",
               "CodeArray": [
@@ -434,7 +353,7 @@
               "Parameters": [
                 {
                   "Key": "allowIrrigation",
-                  "Value": "True"
+                  "Value": "False"
                 },
                 {
                   "Key": "seasonStart",
@@ -504,16 +423,16 @@
                 "        [Description(\"Name of solute:\")]",
                 "        public string SoluteName { get; set; }",
                 "",
+                "        [Description(\"Depth above which there is no change in solute accessibility (mm)\")]",
+                "        public double DepthOfConstantAvailability { get; set; }",
+                "",
                 "        [Description(\"Maximum depth at which solute can be lost in runoff (mm)\")]",
                 "        public double MaxDepthSoluteAccessible { get; set; }",
                 "        ",
-                "        [Description(\"Depth shape factor (mm)\")]",
-                "        public double DepthConstant { get; set; }",
-                "",
-                "        [Description(\"Effectiveness of solute loss (0-1)\")]",
+                "        [Description(\"Effectiveness of solute loss (0-0.99)\")]",
                 "        public double RunoffEffectivenessAtMovingSolute { get; set; }",
                 "        ",
-                "        [Description(\"Maximum amount of runoff water that will have solute in it (mm)\")]",
+                "        [Description(\"Amount of runoff beyond which there is no additional loss of solute (mm)\")]",
                 "        public double MaxEffectiveRunoff { get; set; }",
                 "                ",
                 "        [EventSubscribe(\"StartOfSimulation\")]",
@@ -522,7 +441,7 @@
                 "            Solute solute = Array.Find(solutes, s => s.Name.Equals(SoluteName, StringComparison.InvariantCultureIgnoreCase));",
                 "            if (solute == null)",
                 "                throw new Exception($\"Cannot find solute {SoluteName}\");",
-                "            solute.DepthConstant = DepthConstant;",
+                "            solute.DepthOfConstantAvailability = DepthOfConstantAvailability;",
                 "            solute.MaxDepthSoluteAccessible = MaxDepthSoluteAccessible;",
                 "            solute.RunoffEffectivenessAtMovingSolute = RunoffEffectivenessAtMovingSolute;",
                 "            solute.MaxEffectiveRunoff = MaxEffectiveRunoff;               ",
@@ -533,23 +452,23 @@
               "Parameters": [
                 {
                   "Key": "SoluteName",
-                  "Value": "NO3"
+                  "Value": "no3"
+                },
+                {
+                  "Key": "DepthOfConstantAvailability",
+                  "Value": "10"
                 },
                 {
                   "Key": "MaxDepthSoluteAccessible",
-                  "Value": "20"
-                },
-                {
-                  "Key": "DepthConstant",
-                  "Value": "15"
+                  "Value": "30"
                 },
                 {
                   "Key": "RunoffEffectivenessAtMovingSolute",
-                  "Value": "0.5"
+                  "Value": "0.7"
                 },
                 {
                   "Key": "MaxEffectiveRunoff",
-                  "Value": "10"
+                  "Value": "20"
                 }
               ],
               "Name": "SoluteInRunoff",
@@ -1049,7 +968,7 @@
                     1.0,
                     1.0
                   ],
-                  "DepthConstant": 0.0,
+                  "DepthOfConstantAvailability": 0.0,
                   "MaxDepthSoluteAccessible": 0.0,
                   "RunoffEffectivenessAtMovingSolute": 0.0,
                   "MaxEffectiveRunoff": 0.0,
@@ -1092,7 +1011,7 @@
                     1.0,
                     1.0
                   ],
-                  "DepthConstant": 0.0,
+                  "DepthOfConstantAvailability": 0.0,
                   "MaxDepthSoluteAccessible": 0.0,
                   "RunoffEffectivenessAtMovingSolute": 0.0,
                   "MaxEffectiveRunoff": 0.0,
@@ -1135,7 +1054,7 @@
                     1.0,
                     1.0
                   ],
-                  "DepthConstant": 0.0,
+                  "DepthOfConstantAvailability": 0.0,
                   "MaxDepthSoluteAccessible": 0.0,
                   "RunoffEffectivenessAtMovingSolute": 0.0,
                   "MaxEffectiveRunoff": 0.0,
@@ -1178,7 +1097,7 @@
                     1.0,
                     1.0
                   ],
-                  "DepthConstant": 0.0,
+                  "DepthOfConstantAvailability": 0.0,
                   "MaxDepthSoluteAccessible": 0.0,
                   "RunoffEffectivenessAtMovingSolute": 0.0,
                   "MaxEffectiveRunoff": 0.0,
@@ -1235,8 +1154,8 @@
             },
             {
               "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
-              "Title": null,
-              "Position": 0,
+              "Title": "NO3.AmountLostInRunoff(1)",
+              "Position": 2,
               "Inverted": false,
               "CrossesAtZero": false,
               "LabelOnOneLine": false,
@@ -1246,13 +1165,13 @@
             },
             {
               "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
-              "Title": "NO3.AmountLostInRunoff(1)",
-              "Position": 2,
+              "Title": "Runoff",
+              "Position": 0,
               "Inverted": false,
               "CrossesAtZero": false,
               "LabelOnOneLine": false,
-              "Minimum": "NaN",
-              "Maximum": "NaN",
+              "Minimum": null,
+              "Maximum": null,
               "Interval": null
             }
           ],
@@ -1266,7 +1185,7 @@
           "Children": [
             {
               "$type": "Models.Series, Models",
-              "Type": 0,
+              "Type": 1,
               "XAxis": 3,
               "YAxis": 0,
               "ColourArgb": -11094807,
@@ -1284,7 +1203,7 @@
               "Y2FieldName": null,
               "ShowInLegend": true,
               "IncludeSeriesNameInLegend": false,
-              "Cumulative": false,
+              "Cumulative": true,
               "CumulativeX": false,
               "Filter": null,
               "Name": "Runoff",
