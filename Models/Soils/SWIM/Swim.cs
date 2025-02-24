@@ -2052,6 +2052,9 @@ namespace Models.Soils
                                                                         depthAvailabilityFactor *
                                                                         runoffAmountFactor *
                                                                         solutes[solnum].RunoffEffectivenessAtMovingSolute;
+                            // Ensure amount solute lost in runoff is not greater than amount in solution
+                            solutes[solnum].AmountLostInRunoff[layer] = Math.Min(solutes[solnum].AmountLostInRunoff[layer],
+                                                                                 solutes[solnum].AmountInSolution[layer]);
                         }
                         var delta = MathUtilities.Multiply_Value(solutes[solnum].AmountLostInRunoff, -1.0);
                         solutes[solnum].AddKgHaDelta(SoluteSetterType.Soil, delta);
