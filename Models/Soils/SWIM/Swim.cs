@@ -2035,16 +2035,21 @@ namespace Models.Soils
 
                     // Calculate amount of solute lost (kg/ha) in runoff water.
                     if (TD_runoff > 0 &&
-                        solutes[solnum].DepthConstant > 0 &&
-                        solutes[solnum].MaxDepthSoluteAccessible > 0 &&
-                        solutes[solnum].MaxEffectiveRunoff > 0 &&
+                        // solutes[solnum].DepthOfConstantAvailability > 0 &&  why are all these needed?
+                        // solutes[solnum].MaxDepthSoluteAccessible > 0 &&
+                        // solutes[solnum].MaxEffectiveRunoff > 0 &&
                         solutes[solnum].RunoffEffectivenessAtMovingSolute > 0)
                     {
                         for (int layer = 0; layer < depthMidPoints.Length; layer++)
                         {
                             double depthAvailabilityFactor = 0;
                             if (depthMidPoints[layer] <= solutes[solnum].MaxDepthSoluteAccessible)
-                                depthAvailabilityFactor = Math.Pow(solutes[solnum].DepthConstant / depthMidPoints[layer], 2);
+                            {
+                                depthAvailabilityFactor = 1.0 - (depthMidPoints[layer] - solutes[solnum].DepthOfConstantAvailability) /
+                                                (solutes[solnum].MaxDepthSoluteAccessible - solutes[solnum].DepthOfConstantAvailability);
+                                depthAvailabilityFactor = Math.Min(1.0, Math.Max(0.0, depthAvailabilityFactor));
+                            }
+                                    //Math.Pow(solutes[solnum].DepthOfConstantAvailability / depthMidPoints[layer], 2);
 
                             double runoffAmountFactor = Math.Min(1.0, TD_runoff / solutes[solnum].MaxEffectiveRunoff);
 
