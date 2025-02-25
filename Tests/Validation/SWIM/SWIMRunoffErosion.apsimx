@@ -247,7 +247,9 @@
               "Children": [
                 {
                   "$type": "Models.Manager, Models",
-                  "CodeArray": [],
+                  "CodeArray": [
+                    ""
+                  ],
                   "Parameters": [],
                   "Name": "CalculateRollingWaterBalance",
                   "ResourceName": null,
@@ -421,11 +423,35 @@
                       "DULMetadata": null,
                       "SATMetadata": null,
                       "KSMetadata": null,
-                      "RocksMetadata": null,
+                      "RocksMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
                       "TextureMetadata": null,
-                      "ParticleSizeSandMetadata": null,
-                      "ParticleSizeSiltMetadata": null,
-                      "ParticleSizeClayMetadata": null,
+                      "ParticleSizeSandMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
+                      "ParticleSizeSiltMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
+                      "ParticleSizeClayMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
                       "Name": "Physical",
                       "ResourceName": null,
                       "Children": [
@@ -452,9 +478,27 @@
                             1.0,
                             0.0
                           ],
-                          "LLMetadata": null,
-                          "KLMetadata": null,
-                          "XFMetadata": null,
+                          "LLMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
+                          "KLMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
+                          "XFMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
                           "Name": "AgPRyegrassSoil",
                           "ResourceName": null,
                           "Children": [],
@@ -484,9 +528,27 @@
                             0.0,
                             0.0
                           ],
-                          "LLMetadata": null,
-                          "KLMetadata": null,
-                          "XFMetadata": null,
+                          "LLMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
+                          "KLMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
+                          "XFMetadata": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                          ],
                           "Name": "AgPWhiteCloverSoil",
                           "ResourceName": null,
                           "Children": [],
@@ -849,6 +911,32 @@
                       "Children": [],
                       "Enabled": true,
                       "ReadOnly": false
+                    },
+                    {
+                      "$type": "Models.Soils.Erosion, Models",
+                      "soil_loss_bed": 0.0,
+                      "soil_loss_susp": 0.0,
+                      "ReduceSoilThickness": false,
+                      "slope": 6.0,
+                      "slope_length": 60.0,
+                      "ModelType": 0,
+                      "k_factor_bed": 0.36,
+                      "k_factor_susp": 0.04,
+                      "p_factor": 0.1,
+                      "entrain_eff_bed": 0.0,
+                      "entrain_eff_susp": 0.0,
+                      "eros_rose_b2_bed": 0.0,
+                      "eros_rose_b2_susp": 0.0,
+                      "MinimumDepth": 100.0,
+                      "BedDepth": 700.0,
+                      "CumulativeDltDlayer": 0.0,
+                      "erosion_cover": 0.0,
+                      "ThresholdForWarningTopLayerEroded": 0.0,
+                      "Name": "Erosion",
+                      "ResourceName": null,
+                      "Children": [],
+                      "Enabled": true,
+                      "ReadOnly": false
                     }
                   ],
                   "Enabled": true,
@@ -876,7 +964,7 @@
                   "Canopies": [],
                   "InitialResidueName": "grass",
                   "InitialResidueType": "grass",
-                  "InitialResidueMass": 20.0,
+                  "InitialResidueMass": 2000.0,
                   "InitialStandingFraction": 0.0,
                   "InitialCPR": 0.0,
                   "InitialCNR": 17.0,
@@ -1108,7 +1196,10 @@
                     "[CalculateRollingWaterBalance].Script.PlantWaterUptake",
                     "[Soil].Swim3.PSI as Psi",
                     "[Soil].Water.Volumetric as SW",
-                    "[Irrigation].IrrigationApplied as Irrigation"
+                    "[Irrigation].IrrigationApplied as Irrigation",
+                    "sum([physical].Thickness)",
+                    "[Erosion].SoilLoss",
+                    "[Erosion].CumulativeDltDlayer"
                   ],
                   "EventNames": [
                     "[Clock].EndOfDay"
@@ -1153,7 +1244,7 @@
                 {
                   "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
                   "Title": "Runoff",
-                  "Position": 2,
+                  "Position": 0,
                   "Inverted": false,
                   "CrossesAtZero": false,
                   "LabelOnOneLine": false,
@@ -1174,7 +1265,7 @@
                   "$type": "Models.Series, Models",
                   "Type": 1,
                   "XAxis": 3,
-                  "YAxis": 2,
+                  "YAxis": 0,
                   "ColourArgb": 0,
                   "FactorToVaryColours": "SimulationName",
                   "FactorToVaryMarkers": null,
@@ -1194,6 +1285,142 @@
                   "CumulativeX": false,
                   "Filter": null,
                   "Name": "Runoff",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                }
+              ],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Graph, Models",
+              "Caption": null,
+              "Axis": [
+                {
+                  "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+                  "Title": null,
+                  "Position": 3,
+                  "Inverted": false,
+                  "CrossesAtZero": false,
+                  "LabelOnOneLine": false,
+                  "Minimum": null,
+                  "Maximum": null,
+                  "Interval": null
+                },
+                {
+                  "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+                  "Title": "Erosion.SoilLoss",
+                  "Position": 0,
+                  "Inverted": false,
+                  "CrossesAtZero": false,
+                  "LabelOnOneLine": false,
+                  "Minimum": null,
+                  "Maximum": null,
+                  "Interval": null
+                }
+              ],
+              "LegendPosition": 0,
+              "LegendOrientation": 0,
+              "AnnotationLocation": 0,
+              "DisabledSeries": [],
+              "LegendOutsideGraph": false,
+              "Name": "Soil loss",
+              "ResourceName": null,
+              "Children": [
+                {
+                  "$type": "Models.Series, Models",
+                  "Type": 1,
+                  "XAxis": 3,
+                  "YAxis": 0,
+                  "ColourArgb": -2793984,
+                  "FactorToVaryColours": "SimulationName",
+                  "FactorToVaryMarkers": null,
+                  "FactorToVaryLines": null,
+                  "Marker": 11,
+                  "MarkerSize": 0,
+                  "Line": 0,
+                  "LineThickness": 0,
+                  "TableName": "Report",
+                  "XFieldName": "Date",
+                  "YFieldName": "Erosion.SoilLoss",
+                  "X2FieldName": null,
+                  "Y2FieldName": null,
+                  "ShowInLegend": true,
+                  "IncludeSeriesNameInLegend": false,
+                  "Cumulative": true,
+                  "CumulativeX": false,
+                  "Filter": null,
+                  "Name": "Soil loss",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                }
+              ],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Graph, Models",
+              "Caption": null,
+              "Axis": [
+                {
+                  "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+                  "Title": null,
+                  "Position": 3,
+                  "Inverted": false,
+                  "CrossesAtZero": false,
+                  "LabelOnOneLine": false,
+                  "Minimum": null,
+                  "Maximum": null,
+                  "Interval": null
+                },
+                {
+                  "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+                  "Title": "",
+                  "Position": 0,
+                  "Inverted": false,
+                  "CrossesAtZero": false,
+                  "LabelOnOneLine": false,
+                  "Minimum": "NaN",
+                  "Maximum": null,
+                  "Interval": null
+                }
+              ],
+              "LegendPosition": 0,
+              "LegendOrientation": 0,
+              "AnnotationLocation": 0,
+              "DisabledSeries": [],
+              "LegendOutsideGraph": false,
+              "Name": "Soil depth loss",
+              "ResourceName": null,
+              "Children": [
+                {
+                  "$type": "Models.Series, Models",
+                  "Type": 1,
+                  "XAxis": 3,
+                  "YAxis": 0,
+                  "ColourArgb": -2793984,
+                  "FactorToVaryColours": "SimulationName",
+                  "FactorToVaryMarkers": null,
+                  "FactorToVaryLines": null,
+                  "Marker": 11,
+                  "MarkerSize": 0,
+                  "Line": 0,
+                  "LineThickness": 0,
+                  "TableName": "Report",
+                  "XFieldName": "Date",
+                  "YFieldName": "Erosion.CumulativeDltDlayer",
+                  "X2FieldName": null,
+                  "Y2FieldName": null,
+                  "ShowInLegend": true,
+                  "IncludeSeriesNameInLegend": false,
+                  "Cumulative": false,
+                  "CumulativeX": false,
+                  "Filter": null,
+                  "Name": "series",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,

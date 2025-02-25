@@ -34,6 +34,9 @@ namespace Models.WaterModel
 
         // --- Outputs -----------------------------------------------------------------------
 
+        /// <summary>Gets the cover surface runoff.</summary>
+        public double CoverSurfaceRunoff { get; set; }
+
         /// <summary>Canopy heights. Used by EffectiveCoverMultipler.</summary>
         public double[] CanopyHeights
         {
@@ -50,12 +53,12 @@ namespace Models.WaterModel
         /// <summary>Returns the value to subtract from curve number due to cover.</summary>
         public double Value(int arrayIndex = -1)
         {
-            double cover_surface_runoff = CalcCoverForRunoff();
+            CoverSurfaceRunoff = CalcCoverForRunoff();
 
             // Reduce CN2 for the day due to the cover effect
             // NB cover_surface_runoff should really be a parameter to this function
             // proportion of maximum cover effect on runoff (0-1)
-            double cover_fract = MathUtilities.Divide(cover_surface_runoff, waterBalance.CNCov, 0.0);
+            double cover_fract = MathUtilities.Divide(CoverSurfaceRunoff, waterBalance.CNCov, 0.0);
             cover_fract = MathUtilities.Bound(cover_fract, 0.0, 1.0);
             double cover_reduction = waterBalance.CNRed * cover_fract;
             return cover_reduction;
@@ -81,7 +84,7 @@ namespace Models.WaterModel
                 coverSurfaceCrop = addCover(coverSurfaceCrop, effectiveCropCover);
             }
 
-            // add cover known to affect runoff i.e. residue with canopy shading residue         
+            // add cover known to affect runoff i.e. residue with canopy shading residue
             return addCover(coverSurfaceCrop, surfaceOrganicMatter.Cover);
         }
 

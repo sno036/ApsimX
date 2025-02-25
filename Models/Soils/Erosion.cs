@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using APSIM.Shared.Utilities;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Models.Core;
 using Models.Interfaces;
 using Newtonsoft.Json;
@@ -8,7 +10,7 @@ namespace Models.Soils
 {
 
     /// <summary>
-    /// The clock model is resonsible for controlling the daily timestep in APSIM. It 
+    /// The clock model is resonsible for controlling the daily timestep in APSIM. It
     /// keeps track of the simulation date and loops from the start date to the end
     /// date, publishing events that other models can subscribe to.
     /// </summary>
@@ -24,6 +26,9 @@ namespace Models.Soils
         [Link]
         private ISoilWater waterBalance = null;
 
+        [Link]
+        private Physical physical = null;
+
         /// <summary>Describes the different erosion models supported.</summary>
         public enum ModelTypeEnum
         {
@@ -33,6 +38,10 @@ namespace Models.Soils
             /// <summary>Simplified rose model from PERFECT.</summary>
             Rose
         }
+
+        /// <summary>Reduce soil layer thickness on erosion?</summary>
+        [Description("Reduce soil layer thickness on erosion?")]
+        public bool ReduceSoilThickness { get; set; }
 
         /// <summary>Slope of plot (%).</summary>
         [Description("Slope (%)")]
@@ -81,6 +90,14 @@ namespace Models.Soils
         [Display(VisibleCallback = "IsRoseModel")]
         public double eros_rose_b2_susp { get; set; }
 
+        /// <summary>Minimum depth of soil allowed in profile.</summary>
+        [Description("Minimum depth of soil allowed in profile")]
+        public double MinimumDepth { get; set; }
+
+        /// <summary>Depth to bedrock (mm).</summary>
+        [Description("Depth to bedrock (mm)")]
+        public double BedDepth { get; set; }
+
         /// <summary>Daily soil loss in bed.</summary>
         [Units("t/ha")]
         public double soil_loss_bed;
@@ -88,6 +105,10 @@ namespace Models.Soils
         /// <summary>Daily soil loss in suspension.</summary>
         [Units("t/ha")]
         public double soil_loss_susp;
+
+        /// <summary>Cumulative soil depth loss.</summary>
+        [Units("mm")]
+        public double CumulativeDltDlayer { get; set; }
 
         /// <summary>Soil loss from surface.</summary>
         [Units("t/ha")]
@@ -107,6 +128,16 @@ namespace Models.Soils
         /// <summary>Is the Freebairn model turned on?</summary>
         public bool IsRoseModel => ModelType == ModelTypeEnum.Rose;
 
+        /// <summary>mm reflecting above.</summary>
+        public double LayerMergeMM { get; private set; }
+
+        /// <summary>Layer thickness threshold. Below this fraction of original layer, the layer is absorbed into the layer above.</summary>
+        [Description("Layer thickness threshold. Below this fraction of original layer, the layer is absorbed into the layer above")]
+        public double ProfileLayerMerge { get; private set; }
+
+        /// <summary>Threshold for warning when top layer eroded.</summary>
+        [Description("Threshold for warning when top layer eroded (%)")]
+        public double ThresholdForWarningTopLayerEroded { get; set; }
 
         /// <summary>An event handler to signal start of a simulation.</summary>
         /// <param name="sender">The sender.</param>
@@ -116,6 +147,9 @@ namespace Models.Soils
         {
             soil_loss_bed = 0;
             soil_loss_susp = 0;
+
+            if (BedDepth < physical.Thickness.Sum())
+                throw new Exception("Depth to bedrock is less than profile depth");
 
             // Calculate USLE LS factor
             double s = slope * Constants.pcnt2fract;
@@ -155,6 +189,7 @@ namespace Models.Soils
         [EventSubscribe("DoSoilErosion")]
         private void OnDoSoilErosion(object sender, EventArgs e)
         {
+            erosion_cover = waterBalance.CoverSurfaceRunoff;
             soil_loss_bed = 0.0;
             soil_loss_susp = 0.0;
 
@@ -162,6 +197,93 @@ namespace Models.Soils
                 CalculateFreebairn();
             else
                 CalculateRose();
+
+            if (soil_loss_bed + soil_loss_susp > 0.0)
+                PerformReduceSoilThickness();
+        }
+
+        /// <summary>This subroutine reduces soil thickness when erosion occurs.</summary>
+        private void PerformReduceSoilThickness()
+        {
+            ErosionMoveDlayr(out double dlt_depth_mm_top, out double[] dlt_dlayer, out double dlt_bed_depth);
+
+            // was that too much?
+            if (physical.Thickness.Sum() + dlt_dlayer.Sum() < MinimumDepth)
+                throw new Exception("Erosion has removed all soil from the profile. Stopping simulation.");
+
+            // update depth to bedrock
+            BedDepth += dlt_bed_depth;
+
+            CumulativeDltDlayer += dlt_depth_mm_top;
+            if (CumulativeDltDlayer > ThresholdForWarningTopLayerEroded * physical.Thickness[0])
+                summary.WriteMessage(this, $"Top layer has eroded by {CumulativeDltDlayer:F1} mm", MessageType.Warning);
+        }
+
+        /// <summary>
+        /// This subroutine is called to calculate a delta thickness in response to an erosion event.
+        /// It will remove the top layer and merge the next layer up.
+        /// </summary>
+        private void ErosionMoveDlayr(out double dlt_depth_mm_top, out double[] dlt_dlayer, out double dlt_bed_depth)
+        {
+            dlt_dlayer = new double[physical.Thickness.Length];
+            dlt_bed_depth = 0.0;
+
+            double top = (soil_loss_bed + soil_loss_susp) * Constants.t2g / Constants.ha2scm;         // g/cm2
+            dlt_depth_mm_top = MathUtilities.Divide(top, physical.BD[0], 0.0) * Constants.cm2mm;
+
+            if (ReduceSoilThickness)
+            {
+                int num_layers = physical.Thickness.Length;
+
+                if (dlt_depth_mm_top > physical.Thickness[0])
+                    summary.WriteMessage(this, "Eroding more than top layer depth. This may affect SoilN loss.", MessageType.Diagnostic);
+
+                double dlt_depth_mm = MathUtilities.Divide(top, physical.BD[num_layers - 1], 0.0) * Constants.cm2mm;
+
+                if (dlt_depth_mm > physical.Thickness[num_layers - 1])
+                    summary.WriteMessage(this, $"Eroding more than bottom layer depth. (layer {num_layers}). PAWC calculations may be incorrect if BD is different to layer above.", MessageType.Diagnostic);
+
+                double tot_depth = physical.Thickness.Sum() + dlt_depth_mm;
+
+                if (tot_depth > BedDepth)
+                {
+                    double overrun = tot_depth - BedDepth;
+                    dlt_bed_depth = -overrun;
+
+                    for (int i = num_layers - 1; i >= 0; i--)
+                    {
+                        if (overrun > 0.0)
+                        {
+                            if (overrun <= physical.Thickness[i])
+                            {
+                                dlt_dlayer[i] = -overrun;
+                                double new_depth = dlt_dlayer[i] + physical.Thickness[i];
+                                if (new_depth < LayerMergeMM)
+                                {
+                                    if (i <= 0)
+                                        throw new Exception("Out of soil to erode.");
+                                    else
+                                    {
+                                            dlt_dlayer[i - 1] = new_depth;
+                                            dlt_dlayer[i] = -physical.Thickness[i];
+                                            LayerMergeMM = physical.Thickness[i - 1] * ProfileLayerMerge;
+                                    }
+                                }
+                                overrun = 0.0;
+                            }
+                            else
+                            {
+                                dlt_dlayer[i] = -physical.Thickness[i];
+                                overrun -= physical.Thickness[i];
+                            }
+                        }
+                    }
+
+                    // Apply delta to physical.Thickness
+                    for (int i = 0; i < num_layers; i++)
+                        physical.Thickness[i] += dlt_dlayer[i];
+                }
+            }
         }
 
         private void CalculateFreebairn()

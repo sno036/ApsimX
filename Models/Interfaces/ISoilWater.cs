@@ -149,6 +149,9 @@ namespace Models.Interfaces
         [Units("0-1")]
         double[] SoluteFlowEfficiency { get; set; }
 
+        /// <summary>Surface cover effects on runoff curve number reduction.</summary>
+        double CoverSurfaceRunoff { get; }
+
         ///<summary>Perform a reset</summary>
         void Reset();
 
