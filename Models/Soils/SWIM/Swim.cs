@@ -2026,11 +2026,10 @@ namespace Models.Soils
 
                     solutes[solnum].SetKgHa(SoluteSetterType.Soil, solute_n);
 
-                    // Calculate an amount of solution in solution (kg/ha)
+                    // Calculate an amount of solution in solution (kg/ha)  VOS - this is not correct (but I don't think we need it anyway)
                     double[] concInWater = ConcWaterSolute(solnum);
                     solutes[solnum].AmountInSolution = MathUtilities.Multiply(concInWater, th);
-                    solutes[solnum].AmountInSolution = SoilUtilities.ppm2kgha(physical.Thickness, physical.BD,
-                                                                              solutes[solnum].AmountInSolution);
+                    solutes[solnum].AmountInSolution = SoilUtilities.ppm2kgha(physical.Thickness, physical.BD,solutes[solnum].AmountInSolution);
                     solutes[solnum].ConcAdsorpSolute = ConcAdsorptionSolute(solnum);
 
                     // Calculate amount of solute lost (kg/ha) in runoff water.
@@ -2043,21 +2042,25 @@ namespace Models.Soils
                         for (int layer = 0; layer < depthMidPoints.Length; layer++)
                         {
                             double depthAvailabilityFactor = 0;
-                            if (depthMidPoints[layer] <= solutes[solnum].MaxDepthSoluteAccessible)
+                            if (depthMidPoints[layer] <= solutes[solnum].MaxDepthSoluteAccessibility)
                             {
-                                depthAvailabilityFactor = 1.0 - (depthMidPoints[layer] - solutes[solnum].DepthOfConstantAvailability) /
-                                                (solutes[solnum].MaxDepthSoluteAccessible - solutes[solnum].DepthOfConstantAvailability);
+                                depthAvailabilityFactor = 1.0 - ((depthMidPoints[layer] - solutes[solnum].DepthOfConstantSoluteAccessbility) /
+                                                (solutes[solnum].MaxDepthSoluteAccessibility - solutes[solnum].DepthOfConstantSoluteAccessbility));
                                 depthAvailabilityFactor = Math.Min(1.0, Math.Max(0.0, depthAvailabilityFactor));
                             }
                                     //Math.Pow(solutes[solnum].DepthOfConstantAvailability / depthMidPoints[layer], 2);
 
                             double runoffAmountFactor = Math.Min(1.0, TD_runoff / solutes[solnum].MaxEffectiveRunoff);
 
-                            solutes[solnum].AmountLostInRunoff[layer] = solutes[solnum].AmountInSolution[layer] *
+                            double temp = solutes[solnum].AmountInSolution[layer];
+                            double temp1 = solutes[solnum].kgha[layer];
+
+
+                            solutes[solnum].AmountLostInRunoff[layer] = solutes[solnum].AmountInSolution[layer] *        //.  kgha   AmountInSolution
                                                                         depthAvailabilityFactor *
                                                                         runoffAmountFactor *
                                                                         solutes[solnum].RunoffEffectivenessAtMovingSolute;
-                            // Ensure amount solute lost in runoff is not greater than amount in solution
+                            // Ensure amount solute lost in runoff is not greater than amount in solution - this should not be needed and actually is not strong enough
                             solutes[solnum].AmountLostInRunoff[layer] = Math.Min(solutes[solnum].AmountLostInRunoff[layer],
                                                                                  solutes[solnum].AmountInSolution[layer]);
                         }

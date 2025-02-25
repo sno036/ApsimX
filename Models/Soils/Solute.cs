@@ -103,11 +103,11 @@ namespace Models.Soils
         /// <summary>Solute amount (ppm)</summary>
         public double[] ppm { get { return SoilUtilities.kgha2ppm(Physical.Thickness, Physical.BD, kgha); } }
 
-        /// <summary>Depth constant (mm) used to calculate amount of solute lost in runoff water.</summary>
-        public double DepthConstant { get; set; }
+        /// <summary>Depth constant (mm) used to calculate amount of solute lost in runoff water. Above this depth there is no decrease in accessibiity of the solute to mnovement by runoff.</summary>
+        public double DepthOfConstantSoluteAccessbility { get; set; }
 
         /// <summary>MaxDepthSoluteAccessible (mm) used to calculate amount of solute lost in runoff water.</summary>
-        public double MaxDepthSoluteAccessible { get; set; }
+        public double MaxDepthSoluteAccessibility { get; set; }
 
         /// <summary>RunoffEffectivenessAtMovingSolute (0-1) used to calculate amount of solute lost in runoff water.</summary>
         public double RunoffEffectivenessAtMovingSolute { get; set; }

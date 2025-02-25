@@ -26,16 +26,16 @@
         /// <summary>Solute amount (ppm)</summary>
         double[] ppm { get; }
 
-        /// <summary>Depth constant (mm) used to calculate amount of solute lost in runoff water.</summary>
-        public double DepthConstant { get; set; }
+        /// <summary>Depth constant (mm) used to calculate amount of solute lost in runoff water. Above this depth there is no decrease in accessibiity of the solute to mnovement by runoff.</summary>
+        public double DepthOfConstantSoluteAccessbility{ get; set; }
 
         /// <summary>MaxDepthSoluteAccessible (mm) used to calculate amount of solute lost in runoff water.</summary>
-        public double MaxDepthSoluteAccessible { get; set; }
+        public double MaxDepthSoluteAccessibility { get; set; }
 
-        /// <summary>RunoffEffectivenessAtMovingSolute (0-1) used to calculate amount of solute lost in runoff water.</summary>
+        /// <summary>RunoffEffectivenessAtMovingSolute (0-0.99) used to calculate amount of solute lost in runoff water.</summary>
         public double RunoffEffectivenessAtMovingSolute { get; set; }
 
-        /// <summary>MaxEffectiveRunoff (mm) used to calculate amount of solute lost in runoff water.</summary>
+        /// <summary>MaxEffectiveRunoff (mm) used to calculate amount of solute lost in runoff water. Above this there is no additional solute moved.</summary>
         public double MaxEffectiveRunoff { get; set; }
 
         /// <summary>Amount of solute in solution.</summary>
