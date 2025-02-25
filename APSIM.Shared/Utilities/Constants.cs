@@ -28,12 +28,16 @@ namespace APSIM.Shared.Utilities
         /// <summary>convert fraction to percent</summary>
         public const double fract2pcnt = 100.0;
 
+        /// <summary>Conversion factor for converting ha to square cm.</summary>
+        public const double ha2scm = 10000.0f;
 
+        /// <summary>Conversion factor for converting cm to mm.</summary>
+        public const double cm2mm = 10.0f;
 
         /// <summary>
         /// ISO 3166 list of English short country names.
         /// </summary>
-        public static readonly string[] Countries = 
+        public static readonly string[] Countries =
         {
             "Afghanistan",
             "Åland Islands",

@@ -178,7 +178,6 @@ namespace Models.WaterModel
         [Description("Max. reduction in curve number due to cover")]
         public double CNRed { get; set; } = 20;
 
-
         /// <summary>Gets or sets the cn cov.</summary>
         [Description("Cover for max curve number reduction")]
         public double CNCov { get; set; } = 0.8;
@@ -481,6 +480,9 @@ namespace Models.WaterModel
                 return MathUtilities.Multiply(PAW, soilPhysical.Thickness);
             }
         }
+
+        /// <summary>Surface cover effects on runoff curve number reduction.</summary>
+        public double CoverSurfaceRunoff => runoffModel.CoverSurfaceRunoff;
 
         // --- Event handlers ------------------------------------------------------------
 
