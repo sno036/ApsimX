@@ -1182,6 +1182,11 @@ namespace Models.Soils
             double timestepStart = Time(year, day, _apsimTimeMinutes);
             double timestep = apsim_timestep / 60.0;
 
+            if (clock.Today == new DateTime(1977, 5, 5))
+            {
+
+            }
+
             bool fail = DoSwim(timestepStart, timestep);
             if (fail)
             {
@@ -2649,6 +2654,12 @@ namespace Models.Soils
             hklg = Math.Log10(HP.SimpleK(node, tpsi, physical.SAT, physical.KS));
             temp = Math.Log10(HP.SimpleK(node, tpsi + dpsi, physical.SAT, physical.KS));
             hklgd = (temp - hklg) / Math.Log10((tpsi + dpsi) / tpsi);
+
+            if (double.IsNaN(thd))
+            {
+                thd = 0;
+                hklgd = 0;
+            }
         }
 
         private double CalcTheta(int node, double suction)

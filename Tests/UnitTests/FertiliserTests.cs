@@ -28,6 +28,8 @@ namespace UnitTests
             public double[] AmountInSolution { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
             public double[] ConcAdsorpSolute { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
             double[] ISolute.AmountLostInRunoff { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+            public double DepthOfConstantSoluteAccessbility { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+            public double MaxDepthSoluteAccessibility { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
             public void SetKgHa(SoluteSetterType callingModelType, double[] value)
             {
