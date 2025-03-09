@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "Version": 188,
+  "Version": 189,
   "Name": "Simulations",
   "ResourceName": null,
   "Children": [
@@ -739,8 +739,8 @@
                         1.0,
                         1.0
                       ],
-                      "DepthConstant": 0.0,
-                      "MaxDepthSoluteAccessible": 0.0,
+                      "DepthOfConstantSoluteAccessbility": 0.0,
+                      "MaxDepthSoluteAccessibility": 0.0,
                       "RunoffEffectivenessAtMovingSolute": 0.0,
                       "MaxEffectiveRunoff": 0.0,
                       "Name": "Cl",
@@ -816,8 +816,8 @@
                         1.0,
                         1.0
                       ],
-                      "DepthConstant": 0.0,
-                      "MaxDepthSoluteAccessible": 0.0,
+                      "DepthOfConstantSoluteAccessbility": 0.0,
+                      "MaxDepthSoluteAccessibility": 0.0,
                       "RunoffEffectivenessAtMovingSolute": 0.0,
                       "MaxEffectiveRunoff": 0.0,
                       "Name": "NO3",
@@ -859,8 +859,8 @@
                         1.0,
                         1.0
                       ],
-                      "DepthConstant": 0.0,
-                      "MaxDepthSoluteAccessible": 0.0,
+                      "DepthOfConstantSoluteAccessbility": 0.0,
+                      "MaxDepthSoluteAccessibility": 0.0,
                       "RunoffEffectivenessAtMovingSolute": 0.0,
                       "MaxEffectiveRunoff": 0.0,
                       "Name": "NH4",
@@ -902,8 +902,8 @@
                         1.0,
                         1.0
                       ],
-                      "DepthConstant": 0.0,
-                      "MaxDepthSoluteAccessible": 0.0,
+                      "DepthOfConstantSoluteAccessbility": 0.0,
+                      "MaxDepthSoluteAccessibility": 0.0,
                       "RunoffEffectivenessAtMovingSolute": 0.0,
                       "MaxEffectiveRunoff": 0.0,
                       "Name": "Urea",
