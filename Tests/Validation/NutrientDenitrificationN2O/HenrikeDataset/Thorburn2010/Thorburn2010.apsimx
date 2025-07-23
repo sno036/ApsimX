@@ -1,0 +1,2995 @@
+{
+  "$type": "Models.Core.Simulations, Models",
+  "Version": 191,
+  "Name": "Simulations",
+  "ResourceName": null,
+  "Children": [
+    {
+      "$type": "Models.Storage.DataStore, Models",
+      "useFirebird": false,
+      "CustomFileName": null,
+      "Name": "DataStore",
+      "ResourceName": null,
+      "Children": [],
+      "Enabled": true,
+      "ReadOnly": false
+    },
+    {
+      "$type": "Models.Core.Simulation, Models",
+      "Descriptors": null,
+      "Name": "Simulation",
+      "ResourceName": null,
+      "Children": [
+        {
+          "$type": "Models.Climate.Weather, Models",
+          "ConstantsFile": null,
+          "FileName": "Thorburn\\TeKowai.met",
+          "ExcelWorkSheetName": "",
+          "Latitude": -21.16,
+          "Tav": 22.41,
+          "Amp": 10.12,
+          "Name": "Weather",
+          "ResourceName": null,
+          "Children": [],
+          "Enabled": true,
+          "ReadOnly": false
+        },
+        {
+          "$type": "Models.Clock, Models",
+          "Start": "1902-01-01T00:00:00",
+          "End": "2009-02-25T00:00:00",
+          "Name": "clock",
+          "ResourceName": null,
+          "Children": [],
+          "Enabled": true,
+          "ReadOnly": false
+        },
+        {
+          "$type": "Models.Summary, Models",
+          "Verbosity": 100,
+          "Name": "summaryfile",
+          "ResourceName": null,
+          "Children": [],
+          "Enabled": true,
+          "ReadOnly": false
+        },
+        {
+          "$type": "Models.MicroClimate, Models",
+          "a_interception": 0.0,
+          "b_interception": 1.0,
+          "c_interception": 0.0,
+          "d_interception": 0.0,
+          "SoilHeatFluxFraction": 0.4,
+          "MinimumHeightDiffForNewLayer": 0.0,
+          "NightInterceptionFraction": 0.5,
+          "ReferenceHeight": 2.0,
+          "Name": "MicroClimate",
+          "ResourceName": "MicroClimate",
+          "Children": [],
+          "Enabled": true,
+          "ReadOnly": false
+        },
+        {
+          "$type": "Models.Core.Zone, Models",
+          "Area": 1.0,
+          "Slope": 0.0,
+          "AspectAngle": 0.0,
+          "Altitude": 50.0,
+          "Name": "Field",
+          "ResourceName": null,
+          "Children": [
+            {
+              "$type": "Models.Fertiliser, Models",
+              "Name": "Fertiliser",
+              "ResourceName": "Fertiliser",
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Sugarcane, Models",
+              "maxt_lb": 0.0,
+              "cultivars": null,
+              "Name": "Sugarcane",
+              "ResourceName": "Sugarcane",
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Report, Models",
+              "VariableNames": [
+                "[Clock].Today",
+                "[Sugarcane].crop_status",
+                "[Sugarcane].biomass",
+                "[Sugarcane].cane_wt",
+                "[Sugarcane].sucrose_wt",
+                "[Sugarcane].height",
+                "[Sugarcane].root_depth",
+                "[Sugarcane].node_no_detached",
+                "[Sugarcane].leaves",
+                "[Sugarcane].green_leaves",
+                "[Sugarcane].dead_leaves",
+                "[Sugarcane].lai",
+                "[Sugarcane].tla",
+                "[Sugarcane].plant_n_tot",
+                "[Sugarcane].swdef_photo",
+                "[Sugarcane].swdef_pheno",
+                "[Sugarcane].swdef_expan",
+                "[Sugarcane].swdef_stalk",
+                "[Sugarcane].nfact_photo",
+                "[Sugarcane].nfact_expan",
+                "[Sugarcane].oxdef_photo",
+                "[Sugarcane].ep"
+              ],
+              "EventNames": [
+                "[Clock].DoReport"
+              ],
+              "GroupByVariableName": null,
+              "Name": "Report",
+              "ResourceName": null,
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Surface.SurfaceOrganicMatter, Models",
+              "SurfOM": [],
+              "Canopies": [],
+              "InitialResidueName": "sugar_trash",
+              "InitialResidueType": "Sugarcane",
+              "InitialResidueMass": 1000.0,
+              "InitialStandingFraction": 1.0,
+              "InitialCPR": 0.0,
+              "InitialCNR": 80.0,
+              "Name": "Surface Organic Matter",
+              "ResourceName": "SurfaceOrganicMatter",
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Soils.Soil, Models",
+              "RecordNumber": 0,
+              "ASCOrder": null,
+              "ASCSubOrder": null,
+              "SoilType": null,
+              "LocalName": null,
+              "Site": null,
+              "NearestTown": null,
+              "Region": null,
+              "State": null,
+              "Country": null,
+              "NaturalVegetation": null,
+              "ApsoilNumber": null,
+              "Latitude": 0.0,
+              "Longitude": 0.0,
+              "LocationAccuracy": null,
+              "YearOfSampling": null,
+              "DataSource": null,
+              "Comments": null,
+              "Name": "Soil",
+              "ResourceName": null,
+              "Children": [
+                {
+                  "$type": "Models.Soils.Water, Models",
+                  "Thickness": [
+                    200.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "InitialValues": [
+                    0.22000000000000003,
+                    0.22,
+                    0.216,
+                    0.238,
+                    0.28,
+                    0.28,
+                    0.2799999999999999
+                  ],
+                  "InitialPAWmm": 200.5,
+                  "RelativeTo": "LL15",
+                  "FilledFromTop": true,
+                  "Name": "Water",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Physical, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "ParticleSizeSand": [
+                    5.0,
+                    5.0,
+                    5.0,
+                    5.0,
+                    5.0,
+                    5.0,
+                    5.0
+                  ],
+                  "ParticleSizeSilt": [
+                    65.0,
+                    65.0,
+                    65.0,
+                    65.0,
+                    65.0,
+                    65.0,
+                    65.0
+                  ],
+                  "ParticleSizeClay": [
+                    30.0,
+                    30.0,
+                    30.0,
+                    30.0,
+                    30.0,
+                    30.0,
+                    30.0
+                  ],
+                  "Rocks": [
+                    0.14516129032258085,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "Texture": null,
+                  "BD": [
+                    1.51,
+                    1.5,
+                    1.49,
+                    1.64,
+                    1.67,
+                    1.65,
+                    1.66
+                  ],
+                  "AirDry": [
+                    0.02,
+                    0.02,
+                    0.02,
+                    0.02,
+                    0.03,
+                    0.02,
+                    0.02
+                  ],
+                  "LL15": [
+                    0.08,
+                    0.09,
+                    0.1,
+                    0.1,
+                    0.14,
+                    0.15,
+                    0.16
+                  ],
+                  "DUL": [
+                    0.22,
+                    0.22,
+                    0.22,
+                    0.21,
+                    0.28,
+                    0.28,
+                    0.28
+                  ],
+                  "SAT": [
+                    0.38,
+                    0.38,
+                    0.39,
+                    0.33,
+                    0.32,
+                    0.33,
+                    0.33
+                  ],
+                  "KS": null,
+                  "BDMetadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "AirDryMetadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "LL15Metadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "DULMetadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "SATMetadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "KSMetadata": null,
+                  "RocksMetadata": [
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated"
+                  ],
+                  "TextureMetadata": null,
+                  "ParticleSizeSandMetadata": [
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated"
+                  ],
+                  "ParticleSizeSiltMetadata": [
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated"
+                  ],
+                  "ParticleSizeClayMetadata": [
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated",
+                    "Calculated"
+                  ],
+                  "Name": "Physical",
+                  "ResourceName": null,
+                  "Children": [
+                    {
+                      "$type": "Models.Soils.SoilCrop, Models",
+                      "LL": [
+                        0.1,
+                        0.1,
+                        0.1,
+                        0.11,
+                        0.22,
+                        0.22,
+                        0.22
+                      ],
+                      "KL": [
+                        0.16,
+                        0.16,
+                        0.16,
+                        0.16,
+                        0.12,
+                        0.08,
+                        0.04
+                      ],
+                      "XF": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                      ],
+                      "LLMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
+                      "KLMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
+                      "XFMetadata": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      ],
+                      "Name": "SugarcaneSoil",
+                      "ResourceName": null,
+                      "Children": [],
+                      "Enabled": true,
+                      "ReadOnly": false
+                    }
+                  ],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.WaterModel.WaterBalance, Models",
+                  "SummerDate": "1-Nov",
+                  "SummerU": 4.0,
+                  "SummerCona": 3.0,
+                  "WinterDate": "1-Apr",
+                  "WinterU": 4.0,
+                  "WinterCona": 3.0,
+                  "DiffusConst": 40.0,
+                  "DiffusSlope": 16.0,
+                  "Salb": 0.1,
+                  "CN2Bare": 65.0,
+                  "CNRed": 20.0,
+                  "CNCov": 0.8,
+                  "DischargeWidth": "NaN",
+                  "CatchmentArea": "NaN",
+                  "PSIDul": -100.0,
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "SWCON": [
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.4,
+                    0.4,
+                    0.4,
+                    0.4
+                  ],
+                  "KLAT": null,
+                  "Name": "SoilWater",
+                  "ResourceName": "WaterBalance",
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Organic, Models",
+                  "FOMCNRatio": 70.0,
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "Carbon": [
+                    1.1,
+                    1.0,
+                    0.543,
+                    0.37,
+                    0.267,
+                    0.268,
+                    0.218
+                  ],
+                  "CarbonUnits": 0,
+                  "SoilCNRatio": [
+                    12.5,
+                    12.5,
+                    12.5,
+                    12.5,
+                    12.5,
+                    12.5,
+                    12.5
+                  ],
+                  "FBiom": [
+                    0.06,
+                    0.045,
+                    0.035,
+                    0.015,
+                    0.005,
+                    0.005,
+                    0.005
+                  ],
+                  "FInert": [
+                    0.3,
+                    0.45,
+                    0.85,
+                    0.95,
+                    0.95,
+                    0.99,
+                    0.99
+                  ],
+                  "FOM": [
+                    343.1391579615168,
+                    245.86995056335212,
+                    176.17351790787149,
+                    106.85464004055672,
+                    64.81061531715484,
+                    39.30962526469563,
+                    23.842492944852246
+                  ],
+                  "CarbonMetadata": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ],
+                  "FOMMetadata": null,
+                  "Name": "Organic",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Chemical, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "PH": [
+                    6.0,
+                    6.0,
+                    6.0,
+                    6.0,
+                    6.0,
+                    6.0,
+                    6.0
+                  ],
+                  "PHUnits": 0,
+                  "EC": null,
+                  "ESP": null,
+                  "CEC": null,
+                  "ECMetadata": null,
+                  "CLMetadata": null,
+                  "CECMetadata": null,
+                  "ESPMetadata": null,
+                  "PHMetadata": null,
+                  "Name": "Chemical",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Nutrients.Nutrient, Models",
+                  "Name": "Nutrient",
+                  "ResourceName": "Nutrient",
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Solute, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "InitialValues": [
+                    3.7,
+                    0.9,
+                    0.9,
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6
+                  ],
+                  "InitialValuesUnits": 0,
+                  "WaterTableConcentration": 0.0,
+                  "D0": 0.0,
+                  "Exco": null,
+                  "FIP": null,
+                  "DepthConstant": 0.0,
+                  "MaxDepthSoluteAccessible": 0.0,
+                  "RunoffEffectivenessAtMovingSolute": 0.0,
+                  "MaxEffectiveRunoff": 0.0,
+                  "ConcInSolution": null,
+                  "Name": "NO3",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Solute, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "InitialValues": [
+                    3.3,
+                    3.0,
+                    2.5,
+                    1.8,
+                    0.5,
+                    0.5,
+                    0.5
+                  ],
+                  "InitialValuesUnits": 0,
+                  "WaterTableConcentration": 0.0,
+                  "D0": 0.0,
+                  "Exco": null,
+                  "FIP": null,
+                  "DepthConstant": 0.0,
+                  "MaxDepthSoluteAccessible": 0.0,
+                  "RunoffEffectivenessAtMovingSolute": 0.0,
+                  "MaxEffectiveRunoff": 0.0,
+                  "ConcInSolution": null,
+                  "Name": "NH4",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.Solute, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "InitialValues": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "InitialValuesUnits": 1,
+                  "WaterTableConcentration": 0.0,
+                  "D0": 0.0,
+                  "Exco": null,
+                  "FIP": null,
+                  "DepthConstant": 0.0,
+                  "MaxDepthSoluteAccessible": 0.0,
+                  "RunoffEffectivenessAtMovingSolute": 0.0,
+                  "MaxEffectiveRunoff": 0.0,
+                  "ConcInSolution": null,
+                  "Name": "Urea",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                },
+                {
+                  "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
+                  "Thickness": [
+                    100.0,
+                    150.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0,
+                    250.0
+                  ],
+                  "InitialValues": null,
+                  "Name": "SoilTemperature",
+                  "ResourceName": null,
+                  "Children": [],
+                  "Enabled": true,
+                  "ReadOnly": false
+                }
+              ],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Irrigation, Models",
+              "Name": "Irrigation",
+              "ResourceName": null,
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Operations, Models",
+              "OperationsList": [
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1902-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1902-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1902-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1902-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1903-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1903-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1903-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1903-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1904-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1904-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1904-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1904-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1905-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1905-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1905-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1905-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1906-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1906-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1906-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1906-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1906-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1906-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1906-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1906-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1906-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1906-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1907-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1907-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1907-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1907-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1908-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1908-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1908-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1908-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1909-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1909-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1909-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1909-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1910-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1910-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1910-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1910-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1910-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1910-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1910-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1910-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1910-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1910-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1911-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1911-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1911-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1911-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1912-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1912-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1912-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1912-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1913-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1913-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1913-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1913-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1914-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1914-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1914-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1914-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1914-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1914-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1914-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1914-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1914-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1914-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1915-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1915-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1915-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1915-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1916-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1916-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1916-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1916-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1917-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1917-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1917-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1917-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1918-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1918-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1918-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1918-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1918-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1918-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1918-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1919-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1919-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1919-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1919-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1920-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1920-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1920-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1920-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1921-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1921-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1921-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1921-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1922-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1922-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1922-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1922-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1922-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1922-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1922-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1922-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1922-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1922-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1923-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1923-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1923-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1923-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1924-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1924-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1924-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1924-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1925-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1925-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1925-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1925-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1926-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1926-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1926-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1926-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1926-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1926-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1926-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1926-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1926-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1926-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1927-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1927-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1927-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1927-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1928-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1928-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1928-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1928-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1929-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1929-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1929-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1929-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1930-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1930-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1930-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1930-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1930-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1930-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1930-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1930-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1930-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1930-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1931-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1931-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1931-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1931-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1932-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1932-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1932-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1932-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1933-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1933-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1933-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1933-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1934-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1934-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1934-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1934-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1934-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1934-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1934-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1934-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1934-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1934-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1935-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1935-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1935-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1935-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1936-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1936-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1936-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1936-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1937-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1937-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1937-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1937-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1938-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1938-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1938-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1938-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1938-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1938-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1938-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1939-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1939-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1939-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1939-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1940-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1940-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1940-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1940-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1941-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1941-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1941-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1941-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1942-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1942-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1942-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1942-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1942-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1942-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1942-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1942-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1942-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1942-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1943-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1943-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1943-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1943-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1944-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1944-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1944-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1944-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1945-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1945-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1945-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1945-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1946-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1946-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1946-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1946-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1946-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1946-09-03",
+                  "Action": "[Irrigation].Apply(50);",
+                  "Line": "1946-09-03 [Irrigation].Apply(50);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1947-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1947-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1947-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1947-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1948-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1948-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1948-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1948-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1949-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1949-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1949-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1949-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1950-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1950-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1950-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1950-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1950-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1950-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1950-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1950-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1950-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1950-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1951-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1951-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1951-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1951-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1952-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1952-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1952-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1952-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1953-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1953-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1953-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1953-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1954-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1954-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1954-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1954-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1954-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1954-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1954-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1954-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1954-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1954-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1955-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1955-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1955-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1955-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1956-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1956-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1956-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1956-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1957-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1957-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1957-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1957-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1958-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1958-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1958-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1958-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1958-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1958-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1958-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1958-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1958-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1958-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1959-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1959-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1959-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1959-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1960-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1960-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1960-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1960-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1961-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1961-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1961-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1961-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1962-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1962-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1962-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1962-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1962-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1962-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1962-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1963-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1963-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1963-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1963-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1964-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1964-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1964-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1964-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1965-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1965-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1965-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1965-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1966-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1966-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1966-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1966-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1966-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1966-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1966-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1966-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1966-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1966-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1967-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1967-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1967-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1967-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1968-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1968-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1968-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1968-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1969-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1969-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1969-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1969-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1970-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1970-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1970-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1970-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1970-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1970-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1970-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1971-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1971-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1971-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1971-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1972-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1972-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1972-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1972-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1973-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1973-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1973-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1973-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1974-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1974-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1974-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1974-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1974-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1974-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1974-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1974-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1974-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1974-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1975-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1975-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1975-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1975-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1976-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1976-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1976-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1976-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1977-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1977-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1977-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1977-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1978-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1978-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1978-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1978-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1978-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1978-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1978-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1978-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1978-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1978-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1979-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1979-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1979-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1979-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1980-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1980-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1980-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1980-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1981-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1981-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1981-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1981-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1982-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1982-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1982-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1982-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1982-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1982-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1982-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1983-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1983-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1983-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1983-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1984-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1984-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1984-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1984-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1985-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1985-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1985-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1985-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1986-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1986-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1986-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1986-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1986-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1986-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1986-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1986-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1986-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1986-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1987-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1987-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1987-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1987-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1988-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1988-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1988-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1988-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1989-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1989-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1989-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1989-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1990-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1990-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1990-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1990-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1990-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1990-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1990-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1990-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1990-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1990-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1991-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1991-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1991-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1991-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1992-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1992-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1992-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1992-11-24 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1993-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1993-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1993-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1993-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-08-01",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1994-08-01 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-08-01",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1994-08-01 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-08-01",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1994-08-01 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1994-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);",
+                  "Line": "1994-08-27 [Fertiliser].Apply(amount: 120,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1994-09-03",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "1994-09-03 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1995-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1995-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1995-11-23",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1995-11-23 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1995-11-23",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1995-11-23 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": false,
+                  "Date": null,
+                  "Action": null,
+                  "Line": ""
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1998-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12, 150, q124);",
+                  "Line": "1998-08-25 [Sugarcane].SowNewPlant(12, 150, q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1998-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);",
+                  "Line": "1998-11-25 [Fertiliser].Apply(amount: 160,type: NO3N,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1999-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "1999-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1999-11-23",
+                  "Action": "[Sugarcane].EndCrop();",
+                  "Line": "1999-11-23 [Sugarcane].EndCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "1999-11-23",
+                  "Action": "[Sugarcane].KillCrop();",
+                  "Line": "1999-11-23 [Sugarcane].KillCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2002-08-25",
+                  "Action": "[Sugarcane].SowNewPlant(12,150,q124);",
+                  "Line": "2002-08-25 [Sugarcane].SowNewPlant(12,150,q124);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2002-08-27",
+                  "Action": "[Fertiliser].Apply(amount: 120,type: UreaN,depth: 5);",
+                  "Line": "2002-08-27 [Fertiliser].Apply(amount: 120,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2002-09-24",
+                  "Action": "[Irrigation].Apply(30);",
+                  "Line": "2002-09-24 [Irrigation].Apply(30);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2003-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2003-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2003-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);",
+                  "Line": "2003-11-25 [Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2004-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2004-11-22 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2004-11-24",
+                  "Action": "[Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);",
+                  "Line": "2004-11-24 [Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2005-11-23",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2005-11-23 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2005-11-25",
+                  "Action": "[Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);",
+                  "Line": "2005-11-25 [Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2006-10-20",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2006-10-20 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2006-11-19",
+                  "Action": "[Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);",
+                  "Line": "2006-11-19 [Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2006-11-19",
+                  "Action": "[SurfaceOrganicMatter].Reset();",
+                  "Line": "2006-11-19 [SurfaceOrganicMatter].Reset();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2007-10-05",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2007-10-05 [Sugarcane].HarvestCrop();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2007-10-19",
+                  "Action": "[Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);",
+                  "Line": "2007-10-19 [Fertiliser].Apply(amount: 150,type: UreaN,depth: 5);"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2007-10-19",
+                  "Action": "[SurfaceOrganicMatter].Reset();",
+                  "Line": "2007-10-19 [SurfaceOrganicMatter].Reset();"
+                },
+                {
+                  "$type": "Models.Operation, Models",
+                  "Enabled": true,
+                  "Date": "2008-11-22",
+                  "Action": "[Sugarcane].HarvestCrop();",
+                  "Line": "2008-11-22 [Sugarcane].HarvestCrop();"
+                }
+              ],
+              "Name": "Operations",
+              "ResourceName": null,
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            },
+            {
+              "$type": "Models.Manager, Models",
+              "CodeArray": [
+                "using Models.Soils.Nutrients;",
+                "using APSIM.Shared.Utilities;",
+                "using Models.Surface;",
+                "using Models.Utilities;",
+                "using Models.Soils.Nutrients;",
+                "using Models.Soils;",
+                "using Models.PMF;",
+                "using Models.Core;",
+                "using System;",
+                "using System.Linq;",
+                "using Models.Interfaces;",
+                "",
+                "namespace Models",
+                "{",
+                "    [Serializable]",
+                "    public class Script : Model",
+                "    {",
+                "        [Link] private Clock Clock;",
+                "        [Link] private ISoilWater SoilWater;",
+                "        [Link] private Nutrient nutrient;",
+                "        [Link] private SurfaceOrganicMatter SOM;",
+                "        [Link] private Summary Summary;",
+                "",
+                "        [Description(\"Date to reset on:\")]",
+                "        public string ResetDate {get;set;}",
+                "        ",
+                "        [Description(\"Offset by Days (Negative is Days Before, Positive is Days After):\")]",
+                "        public int OffsetDays {get;set;}",
+                "",
+                "        [Description(\"Reset Water?\")]",
+                "        public bool ResetWater {get;set;}",
+                "",
+                "        [Description(\"Reset Soil Nutrients?\")]",
+                "        public bool ResetNutrients {get;set;}",
+                "",
+                "        [Description(\"Reset Surface Organic Matter?\")]",
+                "        public bool ResetSOM {get;set;}",
+                "",
+                "        [EventSubscribe(\"DoManagement\")]",
+                "        private void OnDoManagement(object sender, EventArgs e)",
+                "        {",
+                "            DateTime offsetDate = DateUtilities.GetDate(ResetDate, Clock.Today).AddDays(OffsetDays);",
+                "            if (offsetDate.Equals(Clock.Today))",
+                "            {",
+                "                if (ResetWater)",
+                "                {",
+                "                    Summary.WriteMessage(this, \"Reset Water\", MessageType.Diagnostic);",
+                "                    SoilWater.Reset();",
+                "                }",
+                "                if (ResetNutrients)",
+                "                {",
+                "                    Summary.WriteMessage(this, \"Reset Nitrogen\", MessageType.Diagnostic);",
+                "                    nutrient.Reset();",
+                "                }",
+                "                if (ResetSOM)",
+                "                {",
+                "                    Summary.WriteMessage(this, \"Reset Surface OM\", MessageType.Diagnostic);",
+                "                    SOM.Reset();",
+                "                }",
+                "            }",
+                "        }",
+                "    }",
+                "}"
+              ],
+              "Parameters": [
+                {
+                  "Key": "ResetDate",
+                  "Value": "24-nov-1996 "
+                },
+                {
+                  "Key": "OffsetDays",
+                  "Value": "0"
+                },
+                {
+                  "Key": "ResetWater",
+                  "Value": "False"
+                },
+                {
+                  "Key": "ResetNutrients",
+                  "Value": "True"
+                },
+                {
+                  "Key": "ResetSOM",
+                  "Value": "False"
+                }
+              ],
+              "Name": "Reset on date",
+              "ResourceName": null,
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            }
+          ],
+          "Enabled": true,
+          "ReadOnly": false
+        },
+        {
+          "$type": "Models.Graph, Models",
+          "Caption": null,
+          "Axis": [
+            {
+              "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+              "Title": null,
+              "Position": 3,
+              "Inverted": false,
+              "CrossesAtZero": false,
+              "LabelOnOneLine": false,
+              "Minimum": null,
+              "Maximum": null,
+              "Interval": null
+            },
+            {
+              "$type": "APSIM.Shared.Graphing.Axis, APSIM.Shared",
+              "Title": null,
+              "Position": 0,
+              "Inverted": false,
+              "CrossesAtZero": false,
+              "LabelOnOneLine": false,
+              "Minimum": null,
+              "Maximum": null,
+              "Interval": null
+            }
+          ],
+          "LegendPosition": 0,
+          "LegendOrientation": 0,
+          "AnnotationLocation": 0,
+          "DisabledSeries": [],
+          "LegendOutsideGraph": false,
+          "Name": "Cane Wt",
+          "ResourceName": null,
+          "Children": [
+            {
+              "$type": "Models.Series, Models",
+              "Type": 1,
+              "XAxis": 3,
+              "YAxis": 0,
+              "ColourArgb": -16736653,
+              "FactorToVaryColours": null,
+              "FactorToVaryMarkers": null,
+              "FactorToVaryLines": null,
+              "Marker": 11,
+              "MarkerSize": 0,
+              "Line": 0,
+              "LineThickness": 0,
+              "TableName": "Report",
+              "XFieldName": "Clock.Today",
+              "YFieldName": "Sugarcane.cane_wt",
+              "X2FieldName": "",
+              "Y2FieldName": "",
+              "ShowInLegend": false,
+              "IncludeSeriesNameInLegend": false,
+              "Cumulative": false,
+              "CumulativeX": false,
+              "Filter": null,
+              "Name": "Series",
+              "ResourceName": null,
+              "Children": [],
+              "Enabled": true,
+              "ReadOnly": false
+            }
+          ],
+          "Enabled": true,
+          "ReadOnly": false
+        }
+      ],
+      "Enabled": true,
+      "ReadOnly": false
+    }
+  ],
+  "Enabled": true,
+  "ReadOnly": false
+}
