@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using APSIM.Numerics;
 using APSIM.Shared.Utilities;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Models.Core;

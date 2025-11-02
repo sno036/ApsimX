@@ -32,6 +32,8 @@ namespace UnitTests
             double[] ISolute.AmountLostInRunoff { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
             public double[] ConcInSolution { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
             public double[] Flow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+            public double DepthOfConstantSoluteAccessbility { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+            public double MaxDepthSoluteAccessibility { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
             public void SetKgHa(SoluteSetterType callingModelType, double[] value)
             {
