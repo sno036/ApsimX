@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UserInterface.Views;
 using Models.PMF.Phen;
 using APSIM.Shared.Documentation;
+using APSIM.Core;
 
 namespace UserInterface.Presenters
 {
@@ -40,29 +41,31 @@ namespace UserInterface.Presenters
         }
 
         private async void PopulateView()
-        {  
+        {
             try
             {
                 //Default text while loading
+                string classInfo = "Model type: " + model.GetType().Name + $"{Environment.NewLine}";
+
                 markdownSummaryAndRemarks = DocumentSummaryAndRemarks(model);
-                view.Text = markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
+                view.Text = classInfo + markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
 
                 //Desynced loading of reflection details (this can take a few seconds, so we desync it from the GUI so it's not laggy)
                 markdownDependencies = await Task.Run(() => DocumentModelDependencies(model));
                 markdownSummaryAndRemarks = markdownSummaryAndRemarks.Append(markdownDependencies);
-                view.Text = markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
+                view.Text = classInfo + markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
 
                 markdownMethods= await Task.Run(() => DocumentModelMethods(model));
                 markdownSummaryAndRemarks = markdownSummaryAndRemarks.Append(markdownMethods);
-                view.Text = markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
+                view.Text = classInfo + markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
 
                 markdownEvents= await Task.Run(() => DocumentModelEvents(model));
                 markdownSummaryAndRemarks = markdownSummaryAndRemarks.Append(markdownEvents);
-                view.Text = markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
+                view.Text = classInfo + markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
 
                 markdownOutputs= await Task.Run(() => DocumentModelOutputs(model));
                 markdownSummaryAndRemarks = markdownSummaryAndRemarks.Append(markdownOutputs);
-                view.Text = markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
+                view.Text = classInfo + markdownSummaryAndRemarks.ToString().Replace("<", @"\<");
 
             }
             catch(Exception e)
@@ -108,7 +111,7 @@ namespace UserInterface.Presenters
         private StringBuilder DocumentModelDependencies(IModel model)
         {
             StringBuilder markdown = new StringBuilder();
-            
+
             DataTable functionTable = GetDependencies(model, m => typeof(IFunction).IsAssignableFrom(GetMemberType(m)));
             DataTable depsTable = GetDependencies(model, m => !typeof(IFunction).IsAssignableFrom(GetMemberType(m)));
 
@@ -148,7 +151,7 @@ namespace UserInterface.Presenters
                 markdown.AppendLine(DataTableUtilities.ToMarkdown(publicMethods, true));
                 markdown.AppendLine();
             }
-            
+
             return markdown;
         }
 
@@ -171,7 +174,7 @@ namespace UserInterface.Presenters
         private StringBuilder DocumentModelOutputs(IModel model)
         {
             StringBuilder markdown = new StringBuilder();
-            
+
             DataTable outputs = GetOutputs(model);
             if (outputs.Rows.Count > 0)
             {
@@ -293,7 +296,7 @@ namespace UserInterface.Presenters
                 if (link != null && filter(member))
                 {
                     DataRow row = result.NewRow();
-                    
+
                     row[0] = member.Name;
                     row[1] = GetMemberType(member).Name;
                     row[2] = link.Type.ToString();
