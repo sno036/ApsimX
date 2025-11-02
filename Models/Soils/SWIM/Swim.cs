@@ -1174,11 +1174,6 @@ namespace Models.Soils
             double timestepStart = Time(year, day, _apsimTimeMinutes);
             double timestep = apsim_timestep / 60.0;
 
-            if (clock.Today == new DateTime(1977, 5, 5))
-            {
-
-            }
-
             bool fail = DoSwim(timestepStart, timestep);
             if (fail)
             {
