@@ -4721,7 +4721,7 @@ namespace Models.Soils
 
             if (h > _hmin)
             {
-                double v = roff0 * Math.Pow(h - _hmin, roff1 - 1.0);
+                double v = roff0 * Math.Pow(h - _hmin, roff1 - 1.0);   // VOS - why is this _hmin not _hmax?
                 roff = v * (h - _hmin);
                 roffh = roff1 * v;
             }
