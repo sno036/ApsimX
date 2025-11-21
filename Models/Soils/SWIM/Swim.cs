@@ -698,11 +698,11 @@ namespace Models.Soils
                                                  double runoffRateFactor, double runoffRatePower)
         {
             isbc = 2;
-            minimum_surface_storage = minimumSurfaceStorage;
-            maximum_surface_storage = maximumSurfaceStorage;
+            minimum_surface_storage = minimumSurfaceStorage;   // VOS - surely these values need to be converted into cm?
+            maximum_surface_storage = maximumSurfaceStorage;   // VOS this is done in swim.cs :1386 and there abouts
             _hmin = initialSurfaceStorage;
             precipitation_constant = precipitationConstant;
-            roff0 = runoffRateFactor;
+            roff0 = runoffRateFactor;                           // shoudl we really be converting these?
             roff1 = runoffRatePower;
         }
 
@@ -1410,7 +1410,7 @@ namespace Models.Soils
             ibbc = 0;
             bbc_value = 0.0;
 
-            if (isbc == 2) // There doesn't seem to be anywhere for isbc to acquire a value other than 0  !!!!
+            if (isbc == 2) // There doesn't seem to be anywhere for isbc to acquire a value other than 0  !!!!  VOS - it comes via SetSurfaceBCForPowerFunction
             {
                 if (Double.IsNaN(minimum_surface_storage))
                     throw new Exception("No value provided for minimum_surface_storage");
