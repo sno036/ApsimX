@@ -127,7 +127,7 @@ namespace Models.Soils
         private const double hydrol_effective_depth = 450;
 
         private double[] _swf;
-        private string rain_time = null;
+        //private string rain_time = null;
         private double rain_durn = Double.NaN;
         private double rain_int = Double.NaN;
         private double[] SWIMRainTime = new double[0];
@@ -398,7 +398,7 @@ namespace Models.Soils
         /// default  start time of rainfall (hh:mm)
         /// </summary>
         [Description("Default start time of the rainfall for the day (hh:mm)")]
-        public string default_rain_time { get; set; } = "00:00";
+        public string rain_time { get; set; } = "00:00";
 
         /// <summary>
         /// default duration of rainfall (min)
@@ -1810,14 +1810,14 @@ namespace Models.Soils
             double duration = 0.0;
             double intensity;
             int timeOfDay;
-            if (string.IsNullOrWhiteSpace(rain_time))
+            if (!string.IsNullOrWhiteSpace(rain_time))
             {
-                timeOfDay = 0;
+                timeOfDay = TimeToMins(rain_time);
                 duration = default_rain_duration;
             }
             else
             {
-                timeOfDay = TimeToMins(rain_time);
+                timeOfDay = 0;
                 if (Double.IsNaN(rain_durn))
                 {
                     if (Double.IsNaN(rain_int))
